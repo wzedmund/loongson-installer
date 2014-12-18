@@ -1,7 +1,31 @@
 #!/bin/sh
 #Partition a hard disk.
-
-dialog --clear --menu "Select a storage device to partition"\
+#simply detect possible existing storage devices
+echo "" > $TEMPNAME
+ls /dev/sda
+if [ $? = 0 ]
+then
+    echo "sda " >> $TEMPNAME
+fi
+ls /dev/sdb
+if [ $? = 0 ] 
+then
+    echo "sdb " >> $TEMPNAME
+fi
+ls /dev/hda
+if [ $? = 0 ] 
+then
+    echo "hda " >> $TEMPNAME
+fi
+ls /dev/hdb
+if [ $? = 0 ] 
+then
+    echo "hdb " >> $TEMPNAME
+fi
+ONLINEDEV=`cat $TEMPNAME`
+dialog --clear --menu "Select a storage device to partition\n
+Following devices have been detected online:\n
+$ONLINEDEV"\
      18 60  6 \
      hda "Primary IDE master" \
      hdb "Primary IDE slave" \

@@ -1,31 +1,11 @@
 #!/bin/bash
 #Partition a hard disk
-
-#sudo mount -t tmpfs none ./usb
-# -r scripts ./usb
-#cd usb && ./main
-
-#!/bin/bash
-#Partition a hard disk
 export TEMPNAME=./choice
 export SCRIPTDIR=./scripts
 export SOURCEDIR=./data
-export TARGETDIR=./sysdisk
+export TARGETDIR=/mnt
 export FLAG=./flag
-export SWAPDEV=./swap
-export SWAPDISK=./swapdisk
-export SYSDISK=./sysdisk
 
-#make sure we create necessary directories
-if [ ! -d ./sysdisk ]
-then
-mkdir ./sysdisk
-fi
-
-if [ ! -d ./swapdisk ]
-then
-mkdir ./swapdisk
-fi
 
 #initialize the loop flag
 FLAG=1
@@ -61,4 +41,6 @@ fi
 echo "$SCRIPTDIR"
 $SCRIPTDIR/$SELECTION.sh
 done
-clear
+
+#clean redundant files
+rm choice
